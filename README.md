@@ -88,15 +88,10 @@ APRRUN_LIFESPAN=30
 <h3 id="database-initialization">Database Initialization</h3>
 <ul>
 <li>
-<p>Determine a DBNAME. For example, set DBNAME to newdb.</p>
-<pre><code>DBNAME=newdb
-</code></pre>
+<p>In local/py/geneatlas_settings, set up DBNAME, DBHOSTNAME, DBUSERNAME, DBPASSWORD per your server MySQL settings.</p>
 </li>
 <li>
-<p>Then, in local/py/geneatlas_settings, set up DBNAME, DBHOSTNAME, DBUSERNAME, DBPASSWORD per your server MySQL settings.</p>
-</li>
-<li>
-<p>Create database and tables in <code>$DBNAME</code> database:</p>
+<p>Create database and tables in <code>DBNAME</code> database:</p>
 <pre><code> /opt/geneatlasdb/atlasapp/geneatlas rdbms --action add
 </code></pre>
 <p>#Optional, to drop database, try:</p>
