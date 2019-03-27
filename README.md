@@ -43,6 +43,7 @@ quit()
 cd /opt/geneatlasdb   ##working folder in all future operations
 virtualenv venv
 source venv/bin/activate
+pip install --upgrade pip
 
 echo "
 Click==7.0
@@ -251,6 +252,23 @@ for gff downloaded from NCBI database (protein name in CDS line, locus name in N
 <pre><code>/opt/geneatlasdb/atlasapp/geneatlas feature-prop --action add --cv-name HOMOLOG --genome-file genome_meta.txt --file gene_homolog.txt --extend-feature
 </code></pre>
 <p>In above example, <code>gene_homolog.txt</code> include two columns (gene/transcript acc and CV term acc)</p>
+<h3 id="deploy-on-product-server">Deploy on product server</h3>
+<p><strong>Apache 2.4</strong></p>
+<p>Suppose installation folder is <code>/opt/geneatlasdb</code> and URI is <code>/geneatlasdb</code>.</p>
+<pre><code>echo "
+WSGIScriptAlias /geneatlasdb  /opt/geneatlasdb/runserver.py
+&lt;Directory /opt/geneatlasdb&gt;
+WSGIScriptReloading On
+Require all granted
+#Order allow,deny
+#Allow from all
+&lt;/Directory&gt;
+" &gt; /tmp/geneatlasdb.conf
+</code></pre>
+<p>Then, for CentOS 7:</p>
+<pre><code>sudo mv /tmp/geneatlasdb.conf /etc/httpd/conf.d/
+sudo systemctl restart httpd
+</code></pre>
 <p>**Others: **</p>
 <p>list or remove cv:</p>
 <pre><code>/opt/geneatlasdb/atlasapp/geneatlas cv --action list
