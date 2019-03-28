@@ -102,7 +102,7 @@ APRRUN_LIFESPAN=30
 </ul>
 <h3 id="load-control-vocabulary-cv-table">Load control vocabulary (CV) table</h3>
 <p>Batch load cv information from file:</p>
-<pre><code>/opt/geneatlasdb/atlasapp/geneatlas cv --action add --file install/cv.txt
+<pre><code>/opt/geneatlasdb/atlasapp/geneatlas cv --action add --file atlasapp/install/cv.txt
 </code></pre>
 <p><code>cv.txt</code> is tab-delimited file with name and definition. Only name is mandatory  column.</p>
 <p>Or, you can specify individual cv record like this:</p>
