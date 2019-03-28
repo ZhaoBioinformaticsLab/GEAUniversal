@@ -109,17 +109,17 @@ APRRUN_LIFESPAN=30
 <pre><code>/opt/geneatlasdb/atlasapp/geneatlas cv --action add --name KEGG --definition "xxx"
 </code></pre>
 <h3 id="load-cv-terms-into-defined-class-table">Load CV terms into defined class table</h3>
-<pre><code>/opt/geneatlasdb/atlasapp/geneatlas cvterm --action add --classname Relationshiptype --cv-name relationship --file install/relationshiptype.txt
+<pre><code>/opt/geneatlasdb/atlasapp/geneatlas cvterm --action add --classname Relationshiptype --cv-name relationship --file atlasapp/install/relationshiptype.txt
 
-/opt/geneatlasdb/atlasapp/geneatlas cvterm --action add --classname Featuretype --cv-name sequence --file install/featuretype.txt
+/opt/geneatlasdb/atlasapp/geneatlas cvterm --action add --classname Featuretype --cv-name sequence --file atlasapp/install/featuretype.txt
 
-/opt/geneatlasdb/atlasapp/geneatlas cvterm --action add --classname Featuretype --cv-name self_definition --file install/self_definition.txt
+/opt/geneatlasdb/atlasapp/geneatlas cvterm --action add --classname Featuretype --cv-name self_definition --file atlasapp/install/self_definition.txt
 
-/opt/geneatlasdb/atlasapp/geneatlas cvterm --action add --classname Treatment --cv-name plant_experimental_condition --file install/treatment.txt
+/opt/geneatlasdb/atlasapp/geneatlas cvterm --action add --classname Treatment --cv-name plant_experimental_condition --file atlasapp/install/treatment.txt
 
-/opt/geneatlasdb/atlasapp/geneatlas cvterm --action add --classname Anatomy --cv-name plant_ontology --file install/anatomy.txt
+/opt/geneatlasdb/atlasapp/geneatlas cvterm --action add --classname Anatomy --cv-name plant_ontology --file atlasapp/install/anatomy.txt
 </code></pre>
-<p>In above command, --cv-name is CV name that is one case of first column in <code>cv.txt</code>. <code>--file</code> followe a CV term file, which is a tab-delimited file with acc, name, definition and is_obsolete columns. Only acc is mandatory column.</p>
+<p>In above command, <code>--cv-name</code> is CV name that is one case of first column in <code>cv.txt</code>. <code>--file</code> followe a CV term file, which is a tab-delimited file with acc, name, definition and is_obsolete columns. Only acc is mandatory column.</p>
 <p>To remove cvterms from specified class, try <code>--action remove</code> with <code>--classname</code> and <code>--cv-name</code>.</p>
 <h3 id="update-apprun-port-hostname-and-port-in-geneatlas_settings.py">Update APPRUN port, hostname and port in geneatlas_settings.py</h3>
 <p>to-be-completed</p>
