@@ -5,10 +5,12 @@
 
 <h2 id="installation-guide-for-geauniversal-12132018">Installation Guide for GEAUniversal (12/13/2018)</h2>
 <h3 id="convention">Convention</h3>
+<p>General option during installation:</p>
 <p><code>--genome-id</code> can always be replaced by <code>--genome-file</code><br>
 <code>--file</code> always represent current data input file<br>
 <code>--force</code> : skip the confirmation step (answer Y/N)<br>
 <code>--override</code>:  delete the existing data before adding. Otherwise it will be adding/updating</p>
+<p>current directory:  <code>/opt/geneatlasdb</code></p>
 <h3 id="pre-requisites-for-linux-distribution-and-packages">Pre-requisites for Linux distribution and packages</h3>
 <p>Ubuntu 16.04</p>
 <pre><code>sudo apt install python-pip* python-virtualenv libmysqlclient-dev libapache2-mod-wsgi sqlite3 libxml2-dev graphviz*
@@ -17,7 +19,7 @@
 <pre><code>sudo yum -y install epel-release 
 sudo yum -y python-pandas python-devel python2-pip python-virtualenv* MySQL-python python-sqlalchemy python-plumbum python2-sh graphviz graphviz-devel 
 </code></pre>
-<h3 id="install-apprun-server-skip-this-step">Install APPRUN server (skip this step!)</h3>
+<h3 id="install-apprun-server-to-be-completed-skip-this-step">Install APPRUN server (to-be-completed; skip this step!)</h3>
 <p>Install java; copy apprun package; set up pin and port; start service by crontab</p>
 <h3 id="r-installation">R installation</h3>
 <p>Install R(&gt;=3.5.0) and related R packages under Linux</p>
@@ -73,7 +75,7 @@ pip install git+https://github.com/xinbindai/goenrich.git
 </code></pre>
 <h3 id="foldersfiles-required-by-geauniversal">Folders/Files required by GEAUniversal</h3>
 <p>Assume /opt/geneatlasdb as installation folder.<br>
-copy atlasapp, biowebtools and install directory into /opt/geneatlasdb<br>
+copy atlasapp and biowebtools directory into /opt/geneatlasdb<br>
 copy <a href="http://runserver.py">runserver.py</a> into /opt/geneatlasdb</p>
 <h3 id="python-initialization">Python Initialization</h3>
 <pre><code>mkdir -p local/py
@@ -145,10 +147,11 @@ transcript_profiledemo  AT5G65720.1 AT5G65720.1 AT5G65720.1 AT1G19940.1 AT5G4914
 chrdemo Chr2 1 200000</p>
 </blockquote>
 <p># indicate comment line. The first word in each line is keyword which describe the genome. Only id, species and annotation are required.</p>
-<p>To remove or list genome meta data:</p>
-<pre><code>atlasapp/geneatlas genome --action remove --id 3702
-atlasapp/geneatlas genome --action list
+<p>To list or remove genome meta data:</p>
+<pre><code>atlasapp/geneatlas genome --action list
+atlasapp/geneatlas genome --action remove --id 3702    
 </code></pre>
+<p>In this case, <code>3702</code> is genome id defined in genome meta file</p>
 <h3 id="load-feature-genetranscript-data-into-rdbms-database">Load feature (gene/transcript) data into RDBMS database</h3>
 <ol>
 <li>
