@@ -3,7 +3,7 @@
 
 ---
 
-<h2 id="installation-guide-for-geauniversal-12132018">Installation Guide for GEAUniversal (12/13/2018)</h2>
+<h2 id="installation-guide-for-geauniversal-04102019">Installation Guide for GEAUniversal (04/10/2019)</h2>
 <h3 id="convention">Convention</h3>
 <p>General option during installation:</p>
 <p><code>--genome-id</code> can always be replaced by <code>--genome-file</code><br>
@@ -96,7 +96,7 @@ APRRUN_LIFESPAN=30
 <li>
 <p>Create database and tables in <code>DBNAME</code> database:</p>
 <pre><code>#if you are under /opt/geneatlasdb
-atlasapp/geneatlas rdbms --action add
+/atlasapp/geneatlas rdbms --action add
 </code></pre>
 <p>#Optional, to drop database, try:</p>
 <pre><code>atlasapp/geneatlas rdbms --action remove
@@ -128,11 +128,11 @@ atlasapp/geneatlas cvterm --action add --classname Anatomy --cv-name plant_ontol
 <p>to-be-completed</p>
 <h3 id="load-genome-meta-information">Load genome meta information</h3>
 <p>Go to data folder which hosts your genome/expression data.</p>
-<pre><code> atlasapp/geneatlas genome --action add --file genome_meta.txt
+<pre><code> atlasapp/geneatlas genome --action add --file genome-meta.tsv
 </code></pre>
-<p>Format of genome_meta.txt:</p>
+<p>Example of genome-meta.tsv:</p>
 <blockquote>
-<p>id  3702<br>
+<p>id  1<br>
 species Arabidopsis thaliana<br>
 genotype    col<br>
 annotation  Araport 11<br>
@@ -147,113 +147,111 @@ transcript_profiledemo  AT5G65720.1 AT5G65720.1 AT5G65720.1 AT1G19940.1 AT5G4914
 chrdemo Chr2 1 200000</p>
 </blockquote>
 <p># indicate comment line. The first word in each line is keyword which describe the genome. Only id, species and annotation are required.</p>
+<p>Here,  genome id can be a NCBI Taxonomy ID for the genome.   However, If you plan to add multiply genomes or genome annotations for the same specifies, you wont choose NCBI taxonomy ID.</p>
 <p>To list or remove genome meta data:</p>
 <pre><code>atlasapp/geneatlas genome --action list
-atlasapp/geneatlas genome --action remove --id 3702    
+atlasapp/geneatlas genome --action remove --id 1
 </code></pre>
-<p>In this case, <code>3702</code> is genome id defined in genome meta file</p>
+<p>In this case, <code>-id 1</code> is genome ID in genome meta tsv file.</p>
 <h3 id="load-feature-genetranscript-data-into-rdbms-database">Load feature (gene/transcript) data into RDBMS database</h3>
 <ol>
 <li>
 <p>load transcript in FASTA format (only transcript will be loaded, no gene information)</p>
-<pre><code>atlasapp/geneatlas feature --action add --genome-id 3880 --fas transcript.fa
+<pre><code>atlasapp/geneatlas feature --action add --genome-file genome-meta.tsv --fas transcript.fa
 </code></pre>
-<p>or, use genome meta file to replace genome id:</p>
-<pre><code>atlasapp/geneatlas feature --action add --genome-file genome_meta.txt --fas transcript.fa        
+<p>or, use genome ID to replace genome meta file:</p>
+<pre><code>atlasapp/geneatlas feature --action add --genome-id 1 --fas transcript.fa
 </code></pre>
 </li>
 <li>
 <p>or, load features(chr/contig/gene/transcript) from GFF file<br>
 <strong>simply case:</strong></p>
-<p>specify <code>genome-id</code>:</p>
-<pre><code>atlasapp/geneatlas feature --action add --genome-id 3880 --gff genome.gff
+<pre><code>atlasapp/geneatlas feature --action add --genome-file genome-meta.tsv --gff genome.gff
 </code></pre>
-<p>specify <code>genome-file</code>:</p>
-<pre><code>atlasapp/geneatlas feature --action add --genome-file genome_meta.txt --gff genome.gff        
-</code></pre>
-<p>Here, <code>3880</code> is an example of genome ID. Usually, it is a NCBI Taxonomy ID for the genome.   If you plan to add multiply genomes or genome annotations for the same specifies, you may not use NCBI taxonomy ID.</p>
 <p><strong>complicate case:</strong><br>
 for gff downloaded from NCBI database (protein name in CDS line, locus name in Name property for gene/transcript):</p>
-<pre><code>atlasapp/geneatlas feature --action add --genome-id 3880 --gff genome.gff --subelements --makeprotein --desckeys product Note --acckeys Name ID
+<pre><code>atlasapp/geneatlas feature --action add --genome-file genome-meta.tsv --gff genome.gff --subelements --makeprotein --desckeys product Note --acckeys Name ID
 </code></pre>
 </li>
 <li>
 <p>remove all features(optional)</p>
-<pre><code>atlasapp/geneatlas feature --action remove --genome-id 3880
+<pre><code>atlasapp/geneatlas feature --action remove --genome-file genome-meta.tsv
 </code></pre>
 </li>
 </ol>
-<h3 id="load-rna-seq-sample-metadata">Load RNA-seq sample metadata</h3>
+<h3 id="load-rna-seq-sample-metadata-by-experiment">Load RNA-seq sample metadata by experiment</h3>
 <ul>
 <li>
 <p>Load sample metadata in term of experiment:</p>
-<p>atlasapp/geneatlas experiment --action add --genome-id 3880 --file rnaseq-meta.csv --force<br>
-<code>--file</code> meta data file name for experiment/condition/sample structure<br>
+<pre><code>atlasapp/geneatlas experiment --action add  --file rnaseq-meta.csv --force    
+</code></pre>
+<p><code>--file</code> meta data file name for experiment/condition/sample structure<br>
 <code>--fileformat</code>  csv or tsv.  csv is default format!</p>
 </li>
 <li>
-<p>List all exp/condition/replicate metadata in csv/tsv format</p>
-<pre><code>atlasapp/geneatlas experiment --action list --genome-id 3880
+<p>Optional, list all exp/condition/replicate metadata in csv/tsv format</p>
+<pre><code>atlasapp/geneatlas experiment --action list --genome-file genome-meta.tsv
 </code></pre>
 <p><code>--fileformat</code> csv or tsv format</p>
 </li>
 <li>
-<p>Remove all experiments (including their conditions, samples, data and cache) for a species:</p>
-<pre><code>atlasapp/geneatlas experiment --action remove --genome-id 3880 --all
+<p>Optional, remove all experiments (including their conditions, samples, data and cache) for a species:</p>
+<pre><code>atlasapp/geneatlas experiment --action remove --genome-file genome-meta.tsv
 </code></pre>
 </li>
 <li>
-<p>Optional, remove an experiment (including its conditions, samples and expression data) by interactive mode (list exps and ask user to choose)(optional)</p>
-<pre><code>atlasapp/geneatlas experiment --action remove --genome-id 3880 --interactive
+<p>Optional, remove an experiment (including its conditions, samples and expression data) by interactive mode (list exps and ask user to choose)</p>
+<pre><code>atlasapp/geneatlas experiment --action remove --genome-file genome-meta.tsv --interactive
 </code></pre>
 <p>User will be asked for the exp ID to be deleted .</p>
 </li>
 </ul>
 <h3 id="load-expression-data-from-rsem-or-salmon-for-samples">Load expression data from RSEM or Salmon for samples:</h3>
-<pre><code>atlasapp/geneatlas expression --action add --genome-id 3880 --file rnaseq-meta.csv --path RSEMSTAR_ArabidopsisThaliana_araport11 --up rsem --featuregroup both --force
+<pre><code>atlasapp/geneatlas expression --action add --genome-file genome-meta.tsv --file rnaseq-meta.csv --path RSEMSTAR__Araport11 --up rsem --featuregroup both --force
 </code></pre>
 <p><code>--featuregroup</code>: gene, transcript or both<br>
-<code>--fileformat</code>: meta data file format, csv or tsv</p>
+<code>--fileformat</code>: meta data file format, csv or tsv<br>
+<code>--force</code>: directly go ahead without Y/N confirmation</p>
 <h3 id="install-go-annotation-optional">Install GO annotation (optional)</h3>
 <p>Example for <em>medicago truncatula</em>.  In <code>--goafile</code>, first column should be gene or transcript acc</p>
-<pre><code>atlasapp/geneatlas go --action add --genome-file genome_meta.txt --obofile go-basic.obo --file gene_GO.txt --fileformat FEATURE2GO  --desc 'Electronic annotation by BLAST against plant uniprot database 201807'
+<pre><code>atlasapp/geneatlas go --action add --genome-file genome_meta.txt--genome_id 3880 --obofile go-basic.obo --goafile gene transcript_GO.txt --fileformat FEATURE2GO  --desc 'Electronic annotation by BLAST against plant uniprot database 201807'
 </code></pre>
 <h3 id="install-kegg-annotation-optional">Install KEGG annotation (optional)</h3>
 <p><code>--file</code> is a tab-delimited text file with two columns, the first column should be gene or transcript acc.</p>
-<pre><code>atlasapp/geneatlas kegg --action add --genome-file genome_meta.txt --file gene_KEGG.txt --taxonomy  Plants --force
+<pre><code>atlasapp/geneatlas kegg --action add --genome-file genome-meta.tsv --file gene-KO.tsv --taxonomy Plants --force
 </code></pre>
 <h3 id="update-genetranscript-description-optional">Update gene/transcript description (optional)</h3>
 <ul>
 <li>
 <p>Delete existing feature description in database and add new description from <code>file</code>.</p>
 <pre><code>#gene description
-atlasapp/geneatlas  feature-desc --action add --genome-id 3880 --override --file gene_desc.txt --featuregroup gene
+atlasapp/geneatlas  feature-desc --action add --genome-file genome-meta.tsv --override --file gene-desc.tsv --featuregroup gene
+
 #transcript description
-atlasapp/geneatlas  feature-desc --action add --genome-id 3880 --override --file transcript_desc.txt --featuregroup transcript
+atlasapp/geneatlas  feature-desc --action add --genome-file genome-meta.tsv --override --file transcript-desc.tsv --featuregroup transcript
 </code></pre>
 <p>If  <code>--featuregroup</code> is gene or transcript,  the content in <code>--file</code> should match it.   If <code>--featuretype</code> is <code>both</code>, then it will update both gene and transcript using the information in <code>--file</code> (either gene or transcript).</p>
 <pre><code> #both gene and transcript will be updated
- atlasapp/geneatlas  feature-desc --action add --genome-id 3880 --override --file transcript_desc.txt --featuregroup both
+ atlasapp/geneatlas  feature-desc --action add --genome-file genome-meta.tsv --override --file transcript-desc.tsv --featuregroup both
 </code></pre>
 </li>
 <li>
 <p>Append GO/KEGG annotation into feature description.</p>
-<pre><code>atlasapp/geneatlas  feature-desc --action add --genome-id 3880 --cvnames biological_process cellular_component molecular_function KEGG  --featuregroup both --includepropname
+<pre><code>atlasapp/geneatlas  feature-desc --action add --genome-file genome-meta.tsv --cvnames biological_process cellular_component molecular_function KEGG  --featuregroup both --includepropname
 </code></pre>
 <p><code>--includepropname</code>: will include the name column in prop table. Otherwise, only acc column will be included.</p>
 </li>
 </ul>
-<h3 id="add-feature-prop-optional">add feature prop (optional)</h3>
-<p>The following commands</p>
+<h3 id="add-feature-prop-optional">Add feature prop (optional)</h3>
 <p>Firstly, register CV name for this kind of prop:</p>
 <pre><code>atlasapp/geneatlas cv --action add --name HOMOLOG --definition 'ortholog or paralog group'
 </code></pre>
-<p>Then, add CV terms for this kind of cv into Prop database table:</p>
+<p>Then, add terms into Prop database table for above cv:</p>
 <pre><code>atlasapp/geneatlas cvterm --action add --classname Prop --cv-name HOMOLOG --file homolog_ontology.txt
 </code></pre>
 <p>In above example, <code>homolog_ontology.txt</code> is a pre-defined CV term file, in which the first column is unique acc.</p>
 <p>Next, add feature_prop into database</p>
-<pre><code>atlasapp/geneatlas feature-prop --action add --cv-name HOMOLOG --genome-file genome_meta.txt --file gene_homolog.txt --extend-feature
+<pre><code>/opt/geneatlasdb/atlasapp/geneatlas feature-prop --action add --cv-name HOMOLOG --genome-file genome-meta.tsv --file gene_homolog.txt --extend-feature
 </code></pre>
 <p>In above example, <code>gene_homolog.txt</code> include two columns (gene/transcript acc and CV term acc)</p>
 <h3 id="deploy-on-product-server">Deploy on product server</h3>
@@ -275,14 +273,15 @@ sudo systemctl restart httpd
 </code></pre>
 <p>**Others: **</p>
 <p>list or remove cv:</p>
-<pre><code>atlasapp/geneatlas cv --action list
+<pre><code>atlasapp/geneatlasOthers usage:-cmeO ge i emo    
+tnata cv --action list
 
-atlasapp/geneatlas cv --action remove --cv-name HOMOLOG
+atlasapp/geneatlas cv --action remove --cvname HOMOLOG
 </code></pre>
 <p>list or remove props by cv_name:</p>
-<pre><code>atlasapp/geneatlas prop --action list --cv-name HOMOLOG
+<pre><code>atlasapp/geneatlaspnata  --action list --cv-name HOMOLOG
 
-atlasapp/geneatlas prop --action remove --cv-name HOMOLOG
+atlasapp/geneatlas prop --action remove --cv-_name HOMOLOG
 </code></pre>
 <h3 id="convention-in-geauniversal">Convention in GEAUniversal</h3>
 <h4 id="references-in-experiment-table">References in Experiment table</h4>
