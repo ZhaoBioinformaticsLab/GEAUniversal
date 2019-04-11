@@ -218,7 +218,7 @@ for gff downloaded from NCBI database (protein name in CDS line, locus name in N
 <p>Below is an example .</p>
 <pre><code>atlasapp/geneatlas go --action add --genome-file genome-meta.tsv --obofile go-basic.obo --file gene transcript-GO.tsv --fileformat FEATURE2GO  --desc 'Electronic annotation by BLAST against plant uniprot database 201807'
 </code></pre>
-<p><code>--file</code> is a GO annotation file. If <code>--fileformat</code> is <code>FEATURE2GO</code>, the first column in the GO annotation file should be gene or transcript acc and the second column shpuld be GO term acc (as described in obofile).</p>
+<p><code>--file</code> is a GO annotation file. If <code>--fileformat</code> is <code>FEATURE2GO</code>, the first column in the GO annotation file should be gene or transcript acc and the second column should be GO term acc (as described in obofile).</p>
 <h3 id="install-kegg-annotation-optional">Install KEGG annotation (optional)</h3>
 <p><code>--file</code> is a tab-delimited text file with two columns, the first column should be gene or transcript acc.</p>
 <pre><code>atlasapp/geneatlas kegg --action add --genome-file genome-meta.tsv --file gene-KO.tsv --taxonomy Plants
