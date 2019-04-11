@@ -95,10 +95,10 @@ APRRUN_LIFESPAN=30
 </li>
 <li>
 <p>Create database and tables in <code>DBNAME</code> database:</p>
-<pre><code>#if you are under /opt/geneatlasdb
-/atlasapp/geneatlas rdbms --action add
+<p>Supposed you are under /opt/geneatlasdb:</p>
+<pre><code>/atlasapp/geneatlas rdbms --action add
 </code></pre>
-<p>#Optional, to drop database, try:</p>
+<p>Optionally, to drop database, try:</p>
 <pre><code>atlasapp/geneatlas rdbms --action remove
 </code></pre>
 </li>
