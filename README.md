@@ -185,7 +185,7 @@ for gff downloaded from NCBI database (protein name in CDS line, locus name in N
 <ul>
 <li>
 <p>Load sample metadata in term of experiment:</p>
-<pre><code>atlasapp/geneatlas experiment --action add  --file rnaseq-meta.csv --force    
+<pre><code>atlasapp/geneatlas experiment --action add --genome-file genome-meta.tsv --file rnaseq-meta.csv --force    
 </code></pre>
 <p><code>--file</code> meta data file name for experiment/condition/sample structure<br>
 <code>--fileformat</code>  csv or tsv.  csv is default format!</p>
