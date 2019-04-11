@@ -304,6 +304,4 @@ atlasapp/geneatlas prop --action remove --cv-_name HOMOLOG
 <h3 id="misc">Misc</h3>
 <h4 id="download-transcript-protein-and-gene-transcript-relationship">Download transcript-protein and gene-transcript relationship</h4>
 <p>Go to species page and click download icon</p>
-<h4 id="deploy-to-apache-as-product-service">Deploy to Apache as product service</h4>
-<p>to-be-complete</p>
 
