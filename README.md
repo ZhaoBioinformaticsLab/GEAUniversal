@@ -226,17 +226,18 @@ for gff downloaded from NCBI database (protein name in CDS line, locus name in N
 <h3 id="update-genetranscript-description-optional">Update gene/transcript description (optional)</h3>
 <ul>
 <li>
-<p>Delete existing feature description in database and add new description from <code>file</code>.</p>
-<pre><code>#gene description
-atlasapp/geneatlas  feature-desc --action add --genome-file genome-meta.tsv --override --file gene-desc.tsv --featuregroup gene
-
-#transcript description
-atlasapp/geneatlas  feature-desc --action add --genome-file genome-meta.tsv --override --file transcript-desc.tsv --featuregroup transcript
+<p>Delete existing gene description in database and add new description from <code>--file</code>.</p>
+<pre><code>atlasapp/geneatlas  feature-desc --action add --genome-file genome-meta.tsv --override --file gene-desc.tsv --featuregroup gene
 </code></pre>
-<p>If  <code>--featuregroup</code> is gene or transcript,  the content in <code>--file</code> should match it.   If <code>--featuretype</code> is <code>both</code>, then it will update both gene and transcript using the information in <code>--file</code> (either gene or transcript).</p>
-<pre><code> #both gene and transcript will be updated
- atlasapp/geneatlas  feature-desc --action add --genome-file genome-meta.tsv --override --file transcript-desc.tsv --featuregroup both
+<p>By simialr way, the following command will delete old description and add new description for transcript:</p>
+<pre><code>atlasapp/geneatlas  feature-desc --action add --genome-file genome-meta.tsv --override --file transcript-desc.tsv --featuregroup transcript
 </code></pre>
+<p>In above two examples,  <code>--featuregroup</code> is <code>gene</code> or <code>transcript</code>,  the first column in <code>--file</code> should match it.</p>
+<p><code>--file</code> specify a description tsv file, in which the first column is gene/transcript acc and the second column is description.</p>
+<p>If <code>--featuregroup</code> is <code>both</code>, then it will update both gene and transcript using the information in <code>--file</code> (either gene or transcript). See this example:</p>
+<pre><code>atlasapp/geneatlas  feature-desc --action add --genome-file genome-meta.tsv --override --file transcript-desc.tsv --featuregroup both
+</code></pre>
+<p>Both gene and transcript will be updated by above command.</p>
 </li>
 <li>
 <p>Append GO/KEGG annotation into feature description.</p>
