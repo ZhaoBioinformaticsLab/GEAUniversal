@@ -123,7 +123,9 @@ atlasapp/geneatlas cvterm --action add --classname Treatment --cv-name plant_exp
 atlasapp/geneatlas cvterm --action add --classname Anatomy --cv-name plant_ontology --file atlasapp/install/anatomy.txt --force
 </code></pre>
 <p>In above command, <code>--cv-name</code> is CV name that is one case of first column in <code>cv.txt</code>. <code>--file</code> followe a CV term file, which is a tab-delimited file with acc, name, definition and is_obsolete columns. Only acc is mandatory column.</p>
-<p>To remove cvterms from specified class, try <code>--action remove</code> with <code>--classname</code> and <code>--cv-name</code>.</p>
+<p>To remove cvterms from specified class, try <code>--action remove</code> with <code>--classname</code> and <code>--cv-name</code> as below:</p>
+<pre><code>atlasapp/geneatlas cvterm --action remove --classname Anatomy --cv-name plant_ontology
+</code></pre>
 <h3 id="update-apprun-port-hostname-and-port-in-geneatlas_settings.py">Update APPRUN port, hostname and port in geneatlas_settings.py</h3>
 <p>to-be-completed</p>
 <h3 id="load-genome-meta-information">Load genome meta information</h3>
