@@ -267,7 +267,7 @@ python runserver.py
 </code></pre>
 <p>Then, open browser, type <code>http://localhost:5000/</code></p>
 <h3 id="deploy-on-product-server">Deploy on product server</h3>
-<p><strong>Provision the installation on Apache 2.4</strong></p>
+<p><strong>Deploy the installation on Apache 2.4</strong></p>
 <p>Suppose installation folder is <code>/opt/geneatlasdb</code> and URI is <code>/geneatlasdb</code>.</p>
 <pre><code>echo "
 WSGIScriptAlias /geneatlasdb  /opt/geneatlasdb/runserver.py
