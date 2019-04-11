@@ -149,7 +149,7 @@ transcript_profiledemo  AT5G65720.1 AT5G65720.1 AT5G65720.1 AT1G19940.1 AT5G4914
 chrdemo Chr2 1 200000</p>
 </blockquote>
 <p># indicate comment line. The first word in each line is keyword which describe the genome. Only id, species and annotation are required.</p>
-<p>Here,  genome id can be a NCBI Taxonomy ID for the genome.   However, If you plan to add multiply genomes or genome annotations for the same specifies, you wont choose NCBI taxonomy ID.</p>
+<p>Here,  genome id can be a NCBI Taxonomy ID for the genome.   However, If you plan to add multiply genome assembly/annotation releases for the same species, you wont choose NCBI taxonomy ID.</p>
 <p>To list or remove genome meta data:</p>
 <pre><code>atlasapp/geneatlas genome --action list
 atlasapp/geneatlas genome --action remove --id 1
