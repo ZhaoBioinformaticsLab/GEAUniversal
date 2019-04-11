@@ -258,8 +258,16 @@ for gff downloaded from NCBI database (protein name in CDS line, locus name in N
 <pre><code>/opt/geneatlasdb/atlasapp/geneatlas feature-prop --action add --cv-name HOMOLOG --genome-file genome-meta.tsv --file gene_homolog.txt --extend-feature
 </code></pre>
 <p>In above example, <code>gene_homolog.txt</code> include two columns (gene/transcript acc and CV term acc)</p>
+<h3 id="test-installation-on-developing-mode">Test installation on developing mode</h3>
+<p>Make sure both session and cache directories have 1777 mode.</p>
+<p>Next,  type:</p>
+<pre><code>cd /opt/geneatlasdb
+source venv/bin/activate
+python runserver.py
+</code></pre>
+<p>Then, open browser, type <code>http://localhost:5000/</code></p>
 <h3 id="deploy-on-product-server">Deploy on product server</h3>
-<p><strong>Apache 2.4</strong></p>
+<p><strong>Provision the installation on Apache 2.4</strong></p>
 <p>Suppose installation folder is <code>/opt/geneatlasdb</code> and URI is <code>/geneatlasdb</code>.</p>
 <pre><code>echo "
 WSGIScriptAlias /geneatlasdb  /opt/geneatlasdb/runserver.py
