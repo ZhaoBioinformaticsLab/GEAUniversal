@@ -215,12 +215,13 @@ for gff downloaded from NCBI database (protein name in CDS line, locus name in N
 <code>--fileformat</code>: meta data file format, csv or tsv<br>
 <code>--force</code>: directly go ahead without Y/N confirmation</p>
 <h3 id="install-go-annotation-optional">Install GO annotation (optional)</h3>
-<p>Example for <em>medicago truncatula</em>.  In <code>--goafile</code>, first column should be gene or transcript acc</p>
-<pre><code>atlasapp/geneatlas go --action add --genome-file genome_meta.txt--genome_id 3880 --obofile go-basic.obo --goafile gene transcript_GO.txt --fileformat FEATURE2GO  --desc 'Electronic annotation by BLAST against plant uniprot database 201807'
+<p>Below is an example .</p>
+<pre><code>atlasapp/geneatlas go --action add --genome-file genome-meta.tsv --obofile go-basic.obo --file gene transcript-GO.tsv --fileformat FEATURE2GO  --desc 'Electronic annotation by BLAST against plant uniprot database 201807'
 </code></pre>
+<p><code>--file</code> is a GO annotation file. If <code>--fileformat</code> is <code>FEATURE2GO</code>, the first column in the GO annotation file should be gene or transcript acc.</p>
 <h3 id="install-kegg-annotation-optional">Install KEGG annotation (optional)</h3>
 <p><code>--file</code> is a tab-delimited text file with two columns, the first column should be gene or transcript acc.</p>
-<pre><code>atlasapp/geneatlas kegg --action add --genome-file genome-meta.tsv --file gene-KO.tsv --taxonomy Plants --force
+<pre><code>atlasapp/geneatlas kegg --action add --genome-file genome-meta.tsv --file gene-KO.tsv --taxonomy Plants
 </code></pre>
 <h3 id="update-genetranscript-description-optional">Update gene/transcript description (optional)</h3>
 <ul>
